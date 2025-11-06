@@ -3,30 +3,44 @@
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), "Inter", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #030712;
+  background-image: radial-gradient(
+      120% 140% at 85% 10%,
+      rgba(59, 130, 246, 0.25),
+      transparent 60%
+    ),
+    radial-gradient(90% 120% at 10% 90%, rgba(16, 185, 129, 0.08), transparent),
+    radial-gradient(120% 90% at 50% 0%, rgba(147, 51, 234, 0.12), transparent);
+  color: #e2e8f0;
+  min-height: 100vh;
+  font-size: 0.98rem;
+  font-feature-settings: "ss01" 1, "cv01" 1, "cv05" 1;
+  background-repeat: no-repeat;
 }
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --background: 226 68% 6%;
+    --foreground: 210 40% 96%;
+    --card: 226 60% 9%;
+    --card-foreground: 210 40% 96%;
+    --popover: 222 60% 10%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 224 92% 65%;
+    --primary-foreground: 222 75% 7%;
+    --secondary: 263 65% 18%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 230 30% 20%;
+    --muted-foreground: 215 20% 72%;
+    --accent: 199 89% 61%;
+    --accent-foreground: 222 75% 7%;
+    --destructive: 355 100% 65%;
+    --destructive-foreground: 222 75% 7%;
+    --border: 230 36% 24%;
+    --input: 230 36% 22%;
+    --ring: 217 92% 60%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -35,25 +49,25 @@ body {
     --radius: 0.5rem;
   }
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
+    --background: 226 70% 5%;
+    --foreground: 210 40% 96%;
+    --card: 226 62% 8%;
     --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
+    --popover: 226 62% 10%;
     --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --primary: 227 94% 68%;
+    --primary-foreground: 222 75% 8%;
+    --secondary: 264 63% 18%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 228 30% 18%;
+    --muted-foreground: 217 23% 72%;
+    --accent: 200 92% 62%;
+    --accent-foreground: 222 75% 8%;
+    --destructive: 355 100% 66%;
+    --destructive-foreground: 222 75% 8%;
+    --border: 230 37% 22%;
+    --input: 230 37% 22%;
+    --ring: 217 92% 60%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -67,6 +81,117 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground selection:bg-sky-500/40 selection:text-sky-50;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply text-balance font-semibold tracking-tight text-slate-100;
+  }
+  p {
+    @apply text-slate-200/90;
+  }
+}
+
+@layer utilities {
+  .glass-surface {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.7), rgba(10, 10, 24, 0.55));
+    box-shadow: 0 22px 65px -40px rgba(59, 130, 246, 0.8);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    backdrop-filter: blur(32px);
+  }
+  .backdrop-grid {
+    background-image: linear-gradient(
+        90deg,
+        rgba(148, 163, 184, 0.08) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        0deg,
+        rgba(148, 163, 184, 0.08) 1px,
+        transparent 1px
+      );
+    background-size: 28px 28px;
+  }
+  .animate-aurora {
+    animation: auroraShift 18s ease-in-out infinite;
+  }
+  .animate-orbit {
+    animation: orbitDrift 22s ease-in-out infinite;
+  }
+  .animate-twinkle {
+    animation: twinkle var(--twinkle-duration, 12s) linear infinite;
+  }
+  .animate-pulse-line {
+    animation: pulseLine 2.8s linear infinite;
+  }
+  .animate-slideUpFade {
+    animation: slideUpFade 0.45s ease-out both;
+  }
+}
+
+@keyframes auroraShift {
+  0%,
+  100% {
+    transform: translate3d(-4%, -1%, 0) scale(1.03);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate3d(4%, -6%, 0) scale(1.08);
+    opacity: 0.9;
+  }
+}
+
+@keyframes orbitDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  40% {
+    transform: translate3d(14px, -12px, 0) scale(1.05);
+  }
+  70% {
+    transform: translate3d(-12px, 12px, 0) scale(0.97);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes pulseLine {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
