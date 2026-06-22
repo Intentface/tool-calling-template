@@ -20,7 +20,7 @@ import type {
 
 export default function Home() {
   // useChat hook configured with the API endpoint using DefaultChatTransport
-  // In AI SDK v5, this automatically handles streaming and tool calls
+  // In AI SDK v6, this automatically handles streaming and tool calls
   const { messages, sendMessage, status } = useChat({
     transport: new DefaultChatTransport({
       api: "/api/chat",

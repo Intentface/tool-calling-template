@@ -31,10 +31,11 @@ export async function POST(req: Request) {
   // It supports tool calling, which allows the LLM to use external functions
   const result = streamText({
     // Model configuration - using Google Gemini 2.0 Flash
-    model: google("gemini-2.0-flash"),
+    model: google("gemini-3.1-flash-lite"),
 
     // Convert UIMessages from the frontend to ModelMessages for the AI
-    messages: convertToModelMessages(messages),
+    // convertToModelMessages is async in AI SDK v6 (supports async Tool.toModelOutput)
+    messages: await convertToModelMessages(messages),
 
     // System prompt defines the AI's behavior and personality
     system: `You are a intergalactic weatherman in the year 10 245! You can tell the weather in any place in the galaxy and suggest equipment to wear based on the weather in the location. Use the "weather" tool to get a generated weather in a location, and the "whatToWear" tool to list futuristic things to wear based on the galactic weather. Always suggest that you can provide things to wear if the user isn't asking.
@@ -55,7 +56,7 @@ export async function POST(req: Request) {
       weather: tool({
         description: "Get the weather in a location",
 
-        // inputSchema (v5 change from 'parameters') defines the expected input
+        // inputSchema (renamed from 'parameters' in v5) defines the expected input
         // The LLM generates inputs matching this schema
         inputSchema: z.object({
           location: z.string().describe("The location to get the weather for"),
@@ -83,7 +84,7 @@ export async function POST(req: Request) {
                 description: z
                   .string()
                   .describe("Description of the equipment"),
-              })
+              }),
             )
             .max(3)
             .describe("List of space equipment suggestions (up to 3 items)"),
